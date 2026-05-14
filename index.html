@@ -29,13 +29,12 @@
     /* ---- Page Grid ---- */
     .page {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       grid-template-areas:
-        "profile profile"
-        "stats   stats"
-        "video   video"
-        "games   team"
-        "favs    favs";
+        "profile profile profile"
+        "stats   stats   stats"
+        "video   video   video"
+        "games   team    favs";
       gap: 16px;
       max-width: 900px;
       width: 100%;
@@ -408,12 +407,8 @@
        ============================ */
     .fav-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    @media (max-width: 480px) {
-      .fav-grid { grid-template-columns: 1fr; }
+      grid-template-columns: 1fr;
+      gap: 16px;
     }
 
     .fav-section-label {

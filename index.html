@@ -58,12 +58,25 @@
     }
 
     /* ---- YouTube埋め込み ---- */
-    .youtube-wrap {
+    .youtube-section {
       margin-top: 28px;
-      border-radius: 12px;
-      overflow: hidden;
       opacity: 0;
       animation: fadeUp 0.7s ease 0.55s forwards;
+    }
+
+    .youtube-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #8888aa;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    .youtube-wrap {
+      border-radius: 12px;
+      overflow: hidden;
     }
 
     .youtube-wrap iframe {
@@ -210,15 +223,20 @@
       最近はTFTばっかりやってます（2026年5月現在）
     </p>
 
-    <div class="youtube-wrap">
-      <iframe id="youtube-frame" src="" allowfullscreen title="ヤンソン - 最新動画"></iframe>
+    <div class="youtube-section">
+      <p class="youtube-label">最新動画</p>
+      <div class="youtube-wrap">
+        <iframe id="youtube-frame" src="" allowfullscreen title="ヤンソン - 最新動画"></iframe>
+      </div>
     </div>
 
     <script>
-      fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent('https://www.youtube.com/feeds/videos.xml?channel_id=UCBRK0ZEOf7ZCmAknLsiHpsQ'))
+      const LIVE_PATTERN = /配信|ライブ|LIVE/i;
+      fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent('https://www.youtube.com/feeds/videos.xml?channel_id=UCBRK0ZEOf7ZCmAknLsiHpsQ') + '&count=10')
         .then(r => r.json())
         .then(data => {
-          const id = new URL(data.items[0].link).searchParams.get('v');
+          const video = data.items.find(item => !LIVE_PATTERN.test(item.title)) || data.items[0];
+          const id = new URL(video.link).searchParams.get('v');
           document.getElementById('youtube-frame').src = 'https://www.youtube.com/embed/' + id;
         })
         .catch(() => {});

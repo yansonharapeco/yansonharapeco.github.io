@@ -31,7 +31,8 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-areas:
-        "profile stats"
+        "profile profile"
+        "stats   stats"
         "video   video"
         "games   team"
         "favs    favs";
@@ -84,21 +85,47 @@
     /* ============================
        PROFILE CARD
        ============================ */
+    .profile-inner {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .profile-left { flex-shrink: 0; }
+
+    .profile-center {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .profile-right {
+      flex-shrink: 0;
+      width: 210px;
+    }
+
+    @media (max-width: 640px) {
+      .profile-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .profile-right { width: 100%; }
+      .divider { margin: 18px auto !important; }
+    }
+
     .avatar {
-      width: 80px;
-      height: 80px;
+      width: 88px;
+      height: 88px;
       border-radius: 50%;
       object-fit: cover;
       display: block;
-      margin: 0 auto 14px;
     }
 
     .name {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: 700;
       letter-spacing: 0.04em;
       color: #f0f0ff;
-      text-align: center;
     }
 
     .title-text {
@@ -107,11 +134,10 @@
       color: #8888aa;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      text-align: center;
     }
 
     .divider {
-      margin: 18px auto;
+      margin: 16px 0;
       width: 36px;
       height: 2px;
       background: linear-gradient(90deg, #7c5cbf, #4ea8de);
@@ -122,12 +148,10 @@
       font-size: 0.88rem;
       line-height: 1.8;
       color: #b0b0cc;
-      text-align: center;
     }
 
     .sns-list {
       list-style: none;
-      margin-top: 20px;
       display: flex;
       flex-direction: column;
       gap: 9px;
@@ -165,18 +189,56 @@
        ============================ */
     .stats-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 2fr 1fr 1fr;
       gap: 12px;
+    }
+
+    @media (max-width: 640px) {
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .stat-item-yt { grid-column: span 2; }
     }
 
     .stat-item {
       background: #12121a;
       border: 1px solid #22223a;
       border-radius: 12px;
-      padding: 14px 10px;
+      padding: 14px 14px;
       text-align: center;
     }
 
+    /* YouTube: icon + label row at top */
+    .stat-svc-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .stat-svc-row svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+    .stat-svc-name {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+
+    /* YouTube item: two numbers side by side */
+    .yt-numbers {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .yt-number-item { flex: 1; text-align: center; }
+
+    .yt-divider {
+      width: 1px;
+      height: 38px;
+      background: #2a2a3a;
+      flex-shrink: 0;
+    }
+
+    /* Single-stat items (Twitch, X) */
     .stat-svc {
       display: flex;
       align-items: center;
@@ -206,7 +268,7 @@
        ============================ */
     .video-wrap {
       position: relative;
-      padding-bottom: 56.25%; /* 16:9 */
+      padding-bottom: 56.25%;
       height: 0;
       border-radius: 12px;
       overflow: hidden;
@@ -219,45 +281,6 @@
       width: 100%;
       height: 100%;
       border: none;
-    }
-
-    /* ============================
-       FAVORITES CARD
-       ============================ */
-    .fav-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    @media (max-width: 480px) {
-      .fav-grid { grid-template-columns: 1fr; }
-    }
-
-    .fav-section-label {
-      font-size: 0.78rem;
-      color: #8888aa;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 10px;
-      font-weight: 600;
-    }
-
-    .fav-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .fav-tag {
-      background: #12121a;
-      border: 1px solid #2a2a3a;
-      border-radius: 20px;
-      padding: 5px 13px;
-      font-size: 0.85rem;
-      color: #e8e8f0;
-      font-weight: 500;
     }
 
     /* ============================
@@ -314,8 +337,8 @@
     }
 
     .badge-master { background: rgba(124,92,191,0.25); color: #bf94ff; border: 1px solid rgba(124,92,191,0.4); }
-    .badge-top    { background: rgba(74,222,128,0.15); color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
-    .badge-auth   { background: rgba(78,168,222,0.15); color: #4ea8de; border: 1px solid rgba(78,168,222,0.3); }
+    .badge-top    { background: rgba(74,222,128,0.15);  color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
+    .badge-auth   { background: rgba(78,168,222,0.15);  color: #4ea8de; border: 1px solid rgba(78,168,222,0.3); }
 
     /* ============================
        TEAM CARD
@@ -359,6 +382,45 @@
       font-size: 0.78rem;
       color: #8888aa;
     }
+
+    /* ============================
+       FAVORITES CARD
+       ============================ */
+    .fav-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 480px) {
+      .fav-grid { grid-template-columns: 1fr; }
+    }
+
+    .fav-section-label {
+      font-size: 0.78rem;
+      color: #8888aa;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .fav-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .fav-tag {
+      background: #12121a;
+      border: 1px solid #2a2a3a;
+      border-radius: 20px;
+      padding: 5px 13px;
+      font-size: 0.85rem;
+      color: #e8e8f0;
+      font-weight: 500;
+    }
   </style>
 </head>
 <body>
@@ -366,40 +428,48 @@
 
   <!-- ====== Profile ====== -->
   <div class="card card-profile">
-    <img class="avatar" src="https://pbs.twimg.com/profile_images/1763238234442829824/a94mRDn8_400x400.jpg" alt="ヤンソン">
-    <h1 class="name">ヤンソン</h1>
-    <p class="title-text">配信者・動画クリエイター</p>
-    <div class="divider"></div>
-    <p class="bio">
-      ポジティブ配信好きな方は楽しんでもらえると思います！<br>
-      最近はTFTばっかりやってます（2026年5月現在）
-    </p>
-    <ul class="sns-list">
-      <li>
-        <a class="sns-btn sns-btn--x" href="https://x.com/yanson_harapeco" target="_blank" rel="noopener noreferrer">
-          <svg class="sns-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.402 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.261 5.636 5.903-5.636Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-          </svg>
-          X (Twitter)
-        </a>
-      </li>
-      <li>
-        <a class="sns-btn sns-btn--youtube" href="https://www.youtube.com/@yanson_harapeco" target="_blank" rel="noopener noreferrer">
-          <svg class="sns-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-          </svg>
-          YouTube
-        </a>
-      </li>
-      <li>
-        <a class="sns-btn sns-btn--twitch" href="https://www.twitch.tv/yanson_harapeco" target="_blank" rel="noopener noreferrer">
-          <svg class="sns-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/>
-          </svg>
-          Twitch
-        </a>
-      </li>
-    </ul>
+    <div class="profile-inner">
+      <div class="profile-left">
+        <img class="avatar" src="https://pbs.twimg.com/profile_images/1763238234442829824/a94mRDn8_400x400.jpg" alt="ヤンソン">
+      </div>
+      <div class="profile-center">
+        <h1 class="name">ヤンソン</h1>
+        <p class="title-text">配信者・動画クリエイター</p>
+        <div class="divider"></div>
+        <p class="bio">
+          ポジティブ配信好きな方は楽しんでもらえると思います！<br>
+          最近はTFTばっかりやってます（2026年5月現在）
+        </p>
+      </div>
+      <div class="profile-right">
+        <ul class="sns-list">
+          <li>
+            <a class="sns-btn sns-btn--x" href="https://x.com/yanson_harapeco" target="_blank" rel="noopener noreferrer">
+              <svg class="sns-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.402 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.261 5.636 5.903-5.636Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+              X (Twitter)
+            </a>
+          </li>
+          <li>
+            <a class="sns-btn sns-btn--youtube" href="https://www.youtube.com/@yanson_harapeco" target="_blank" rel="noopener noreferrer">
+              <svg class="sns-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+              YouTube
+            </a>
+          </li>
+          <li>
+            <a class="sns-btn sns-btn--twitch" href="https://www.twitch.tv/yanson_harapeco" target="_blank" rel="noopener noreferrer">
+              <svg class="sns-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/>
+              </svg>
+              Twitch
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <!-- ====== Stats ====== -->
@@ -407,16 +477,28 @@
     <p class="card-label">実績 & フォロワー</p>
     <div class="stats-grid">
 
-      <div class="stat-item">
-        <div class="stat-svc">
+      <!-- YouTube: 登録者数 + 最高視聴回数 -->
+      <div class="stat-item stat-item-yt">
+        <div class="stat-svc-row">
           <svg viewBox="0 0 24 24" fill="#ff4e4e" aria-hidden="true">
             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
           </svg>
+          <span class="stat-svc-name" style="color:#ff4e4e;">YouTube</span>
         </div>
-        <div class="stat-value" id="yt-subs">—</div>
-        <div class="stat-label">YouTube登録者</div>
+        <div class="yt-numbers">
+          <div class="yt-number-item">
+            <div class="stat-value" id="yt-subs">—</div>
+            <div class="stat-label">登録者数</div>
+          </div>
+          <div class="yt-divider"></div>
+          <div class="yt-number-item">
+            <div class="stat-value">26万</div>
+            <div class="stat-label">最高視聴回数</div>
+          </div>
+        </div>
       </div>
 
+      <!-- Twitch -->
       <div class="stat-item">
         <div class="stat-svc">
           <svg viewBox="0 0 24 24" fill="#bf94ff" aria-hidden="true">
@@ -427,6 +509,7 @@
         <div class="stat-label">Twitchフォロワー</div>
       </div>
 
+      <!-- X -->
       <div class="stat-item">
         <div class="stat-svc">
           <svg viewBox="0 0 24 24" fill="#e8e8f0" aria-hidden="true">
@@ -435,16 +518,6 @@
         </div>
         <div class="stat-value">210</div>
         <div class="stat-label">Xフォロワー</div>
-      </div>
-
-      <div class="stat-item">
-        <div class="stat-svc">
-          <svg viewBox="0 0 24 24" fill="#4ea8de" aria-hidden="true">
-            <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-          </svg>
-        </div>
-        <div class="stat-value">26万</div>
-        <div class="stat-label">最高視聴回数</div>
       </div>
 
     </div>

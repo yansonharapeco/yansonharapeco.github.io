@@ -632,14 +632,20 @@
     })
     .catch(() => {});
 
-  // 最新動画（配信アーカイブを除外）
-  const LIVE_PATTERN = /配信|ライブ|LIVE/i;
+  // 最新動画（ライブアーカイブをAPI経由で除外）
   fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent('https://www.youtube.com/feeds/videos.xml?channel_id=' + YT_CHANNEL_ID) + '&count=10')
     .then(r => r.json())
     .then(data => {
-      const video = data.items.find(item => !LIVE_PATTERN.test(item.title)) || data.items[0];
-      const id = new URL(video.link).searchParams.get('v');
-      document.getElementById('youtube-frame').src = 'https://www.youtube.com/embed/' + id;
+      const items = data.items;
+      const ids = items.map(item => new URL(item.link).searchParams.get('v')).join(',');
+      return fetch(`https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&id=${ids}&key=${YT_API_KEY}`)
+        .then(r => r.json())
+        .then(ytData => {
+          const liveIds = new Set(ytData.items.filter(v => v.liveStreamingDetails).map(v => v.id));
+          const video = items.find(item => !liveIds.has(new URL(item.link).searchParams.get('v'))) || items[0];
+          const id = new URL(video.link).searchParams.get('v');
+          document.getElementById('youtube-frame').src = 'https://www.youtube.com/embed/' + id;
+        });
     })
     .catch(() => {});
 </script>

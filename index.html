@@ -22,228 +22,316 @@
       padding: 24px;
     }
 
-    /* ---- カード ---- */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---- Page Grid ---- */
+    .page {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "profile stats"
+        "video   video"
+        "games   team";
+      gap: 16px;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "profile"
+          "stats"
+          "video"
+          "games"
+          "team";
+      }
+    }
+
+    /* ---- Card Base ---- */
     .card {
       background: #1a1a24;
       border: 1px solid #2a2a3a;
       border-radius: 20px;
-      padding: 48px 40px;
-      max-width: 480px;
-      width: 100%;
-      text-align: center;
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
-
+      padding: 28px 24px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
       opacity: 0;
-      transform: translateY(28px);
-      animation: fadeUp 0.7s ease forwards;
+      transform: translateY(20px);
     }
 
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .card-profile { grid-area: profile; animation: fadeUp 0.6s ease 0.05s forwards; }
+    .card-stats   { grid-area: stats;   animation: fadeUp 0.6s ease 0.15s forwards; }
+    .card-video   { grid-area: video;   animation: fadeUp 0.6s ease 0.25s forwards; }
+    .card-games   { grid-area: games;   animation: fadeUp 0.6s ease 0.35s forwards; }
+    .card-team    { grid-area: team;    animation: fadeUp 0.6s ease 0.45s forwards; }
+
+    /* ---- Section Label ---- */
+    .card-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #8888aa;
+      margin-bottom: 18px;
     }
 
-    /* ---- アバター ---- */
+    /* ============================
+       PROFILE CARD
+       ============================ */
     .avatar {
-      width: 96px;
-      height: 96px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       object-fit: cover;
       display: block;
-      margin: 0 auto 24px;
-      opacity: 0;
-      animation: fadeUp 0.7s ease 0.15s forwards;
+      margin: 0 auto 14px;
     }
 
-    /* ---- YouTube埋め込み ---- */
-    .youtube-section {
-      margin-top: 28px;
-      opacity: 0;
-      animation: fadeUp 0.7s ease 0.55s forwards;
-    }
-
-    .youtube-label {
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #8888aa;
-      margin-bottom: 10px;
-      text-align: left;
-    }
-
-    .youtube-wrap {
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .youtube-wrap iframe {
-      display: block;
-      width: 100%;
-      height: 220px;
-      border: none;
-    }
-
-    /* ---- 名前・肩書き ---- */
     .name {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       font-weight: 700;
       letter-spacing: 0.04em;
       color: #f0f0ff;
-      opacity: 0;
-      animation: fadeUp 0.7s ease 0.25s forwards;
+      text-align: center;
     }
 
-    .title {
-      margin-top: 6px;
-      font-size: 0.9rem;
-      font-weight: 400;
+    .title-text {
+      margin-top: 4px;
+      font-size: 0.78rem;
       color: #8888aa;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      opacity: 0;
-      animation: fadeUp 0.7s ease 0.35s forwards;
+      text-align: center;
     }
 
-    /* ---- 区切り線 ---- */
     .divider {
-      margin: 28px auto;
-      width: 48px;
+      margin: 18px auto;
+      width: 36px;
       height: 2px;
       background: linear-gradient(90deg, #7c5cbf, #4ea8de);
       border-radius: 2px;
-      opacity: 0;
-      animation: fadeUp 0.7s ease 0.42s forwards;
     }
 
-    /* ---- 自己紹介 ---- */
     .bio {
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       line-height: 1.8;
       color: #b0b0cc;
-      opacity: 0;
-      animation: fadeUp 0.7s ease 0.5s forwards;
+      text-align: center;
     }
 
-    /* ---- SNSボタン ---- */
     .sns-list {
       list-style: none;
-      margin-top: 36px;
+      margin-top: 20px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 9px;
     }
-
-    .sns-list li {
-      opacity: 0;
-    }
-    .sns-list li:nth-child(1) { animation: fadeUp 0.7s ease 0.6s forwards; }
-    .sns-list li:nth-child(2) { animation: fadeUp 0.7s ease 0.7s forwards; }
-    .sns-list li:nth-child(3) { animation: fadeUp 0.7s ease 0.8s forwards; }
 
     .sns-btn {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      padding: 13px 20px;
-      border-radius: 12px;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 10px;
       text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       font-weight: 600;
       border: 1px solid transparent;
-      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+      transition: transform 0.18s, background 0.18s, border-color 0.18s;
     }
 
-    .sns-btn:hover {
-      transform: translateY(-2px);
+    .sns-btn:hover { transform: translateY(-2px); }
+
+    .sns-btn--x       { background: #111;    border-color: #333;    color: #e8e8f0; }
+    .sns-btn--x:hover { background: #1c1c1c; border-color: #555; }
+
+    .sns-btn--youtube       { background: #1a0a0a; border-color: #5c1a1a; color: #ff4e4e; }
+    .sns-btn--youtube:hover { background: #250f0f; border-color: #c0392b; }
+
+    .sns-btn--twitch       { background: #12091e; border-color: #3a1a6e; color: #bf94ff; }
+    .sns-btn--twitch:hover { background: #1a1030; border-color: #6441a5; }
+
+    .sns-icon { width: 17px; height: 17px; flex-shrink: 0; }
+
+    /* ============================
+       STATS CARD
+       ============================ */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
     }
 
-    .sns-btn--x {
-      background: #111;
-      border-color: #333;
-      color: #e8e8f0;
-    }
-    .sns-btn--x:hover {
-      background: #1c1c1c;
-      border-color: #555;
+    .stat-item {
+      background: #12121a;
+      border: 1px solid #22223a;
+      border-radius: 12px;
+      padding: 14px 10px;
+      text-align: center;
     }
 
-    .sns-btn--youtube {
-      background: #1a0a0a;
-      border-color: #5c1a1a;
-      color: #ff4e4e;
-    }
-    .sns-btn--youtube:hover {
-      background: #250f0f;
-      border-color: #c0392b;
+    .stat-svc {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
     }
 
-    .sns-btn--twitch {
-      background: #12091e;
-      border-color: #3a1a6e;
-      color: #bf94ff;
-    }
-    .sns-btn--twitch:hover {
-      background: #1a1030;
-      border-color: #6441a5;
+    .stat-svc svg { width: 16px; height: 16px; }
+
+    .stat-value {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #f0f0ff;
+      line-height: 1;
+      letter-spacing: -0.01em;
     }
 
-    .sns-icon {
-      width: 20px;
-      height: 20px;
+    .stat-label {
+      font-size: 0.68rem;
+      color: #8888aa;
+      margin-top: 5px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ============================
+       VIDEO CARD
+       ============================ */
+    .video-wrap {
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .video-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 280px;
+      border: none;
+    }
+
+    /* ============================
+       GAMES CARD
+       ============================ */
+    .game-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .game-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 13px;
+      background: #12121a;
+      border: 1px solid #22223a;
+      border-radius: 10px;
+    }
+
+    .game-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
       flex-shrink: 0;
     }
 
-    /* ---- レスポンシブ ---- */
-    @media (max-width: 480px) {
-      .card {
-        padding: 36px 24px;
-      }
-      .name {
-        font-size: 1.5rem;
-      }
+    .game-info { flex: 1; min-width: 0; }
+
+    .game-name {
+      font-size: 0.72rem;
+      color: #8888aa;
+      letter-spacing: 0.04em;
+    }
+
+    .game-rank {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #e8e8f0;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .rank-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 3px 7px;
+      border-radius: 6px;
+      flex-shrink: 0;
+      letter-spacing: 0.04em;
+    }
+
+    .badge-master { background: rgba(124,92,191,0.25); color: #bf94ff; border: 1px solid rgba(124,92,191,0.4); }
+    .badge-top    { background: rgba(74,222,128,0.15); color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
+    .badge-auth   { background: rgba(78,168,222,0.15); color: #4ea8de; border: 1px solid rgba(78,168,222,0.3); }
+
+    /* ============================
+       TEAM CARD
+       ============================ */
+    .team-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: 10px;
+      text-align: center;
+    }
+
+    .team-emblem {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f97316, #fbbf24);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+    }
+
+    .team-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #f0f0ff;
+      letter-spacing: 0.02em;
+    }
+
+    .team-division {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #f97316;
+      letter-spacing: 0.06em;
+      background: rgba(249,115,22,0.1);
+      border: 1px solid rgba(249,115,22,0.3);
+      padding: 4px 13px;
+      border-radius: 20px;
+    }
+
+    .team-note {
+      font-size: 0.78rem;
+      color: #8888aa;
     }
   </style>
 </head>
 <body>
-  <div class="card">
+<div class="page">
 
+  <!-- ====== Profile ====== -->
+  <div class="card card-profile">
     <img class="avatar" src="https://pbs.twimg.com/profile_images/1763238234442829824/a94mRDn8_400x400.jpg" alt="ヤンソン">
-
     <h1 class="name">ヤンソン</h1>
-    <p class="title">配信者・動画クリエイター</p>
-
+    <p class="title-text">配信者・動画クリエイター</p>
     <div class="divider"></div>
-
     <p class="bio">
       ポジティブ配信好きな方は楽しんでもらえると思います！<br>
       最近はTFTばっかりやってます（2026年5月現在）
     </p>
-
-    <div class="youtube-section">
-      <p class="youtube-label">最新動画</p>
-      <div class="youtube-wrap">
-        <iframe id="youtube-frame" src="" allowfullscreen title="ヤンソン - 最新動画"></iframe>
-      </div>
-    </div>
-
-    <script>
-      const LIVE_PATTERN = /配信|ライブ|LIVE/i;
-      fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent('https://www.youtube.com/feeds/videos.xml?channel_id=UCBRK0ZEOf7ZCmAknLsiHpsQ') + '&count=10')
-        .then(r => r.json())
-        .then(data => {
-          const video = data.items.find(item => !LIVE_PATTERN.test(item.title)) || data.items[0];
-          const id = new URL(video.link).searchParams.get('v');
-          document.getElementById('youtube-frame').src = 'https://www.youtube.com/embed/' + id;
-        })
-        .catch(() => {});
-    </script>
-
     <ul class="sns-list">
-
       <li>
         <a class="sns-btn sns-btn--x" href="https://x.com/yanson_harapeco" target="_blank" rel="noopener noreferrer">
           <svg class="sns-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -252,7 +340,6 @@
           X (Twitter)
         </a>
       </li>
-
       <li>
         <a class="sns-btn sns-btn--youtube" href="https://www.youtube.com/@yanson_harapeco" target="_blank" rel="noopener noreferrer">
           <svg class="sns-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -261,7 +348,6 @@
           YouTube
         </a>
       </li>
-
       <li>
         <a class="sns-btn sns-btn--twitch" href="https://www.twitch.tv/yanson_harapeco" target="_blank" rel="noopener noreferrer">
           <svg class="sns-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -270,8 +356,149 @@
           Twitch
         </a>
       </li>
-
     </ul>
   </div>
+
+  <!-- ====== Stats ====== -->
+  <div class="card card-stats">
+    <p class="card-label">実績 & フォロワー</p>
+    <div class="stats-grid">
+
+      <div class="stat-item">
+        <div class="stat-svc">
+          <svg viewBox="0 0 24 24" fill="#ff4e4e" aria-hidden="true">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </div>
+        <div class="stat-value" id="yt-subs">—</div>
+        <div class="stat-label">YouTube登録者</div>
+      </div>
+
+      <div class="stat-item">
+        <div class="stat-svc">
+          <svg viewBox="0 0 24 24" fill="#bf94ff" aria-hidden="true">
+            <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/>
+          </svg>
+        </div>
+        <div class="stat-value">24</div>
+        <div class="stat-label">Twitchフォロワー</div>
+      </div>
+
+      <div class="stat-item">
+        <div class="stat-svc">
+          <svg viewBox="0 0 24 24" fill="#e8e8f0" aria-hidden="true">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.402 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.261 5.636 5.903-5.636Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </div>
+        <div class="stat-value">210</div>
+        <div class="stat-label">Xフォロワー</div>
+      </div>
+
+      <div class="stat-item">
+        <div class="stat-svc">
+          <svg viewBox="0 0 24 24" fill="#4ea8de" aria-hidden="true">
+            <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+          </svg>
+        </div>
+        <div class="stat-value">26万</div>
+        <div class="stat-label">最高視聴回数</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ====== Video ====== -->
+  <div class="card card-video">
+    <p class="card-label">最新動画</p>
+    <div class="video-wrap">
+      <iframe id="youtube-frame" src="" allowfullscreen title="ヤンソン - 最新動画"></iframe>
+    </div>
+  </div>
+
+  <!-- ====== Game Achievements ====== -->
+  <div class="card card-games">
+    <p class="card-label">ゲーム実績</p>
+    <div class="game-list">
+
+      <div class="game-item">
+        <div class="game-dot" style="background:#bf94ff;"></div>
+        <div class="game-info">
+          <div class="game-name">TFT</div>
+          <div class="game-rank">マスター</div>
+        </div>
+        <span class="rank-badge badge-master">MASTER</span>
+      </div>
+
+      <div class="game-item">
+        <div class="game-dot" style="background:#f97316;"></div>
+        <div class="game-info">
+          <div class="game-name">APEX LEGENDS</div>
+          <div class="game-rank">S8〜12 マスター / ミラージュ専</div>
+        </div>
+        <span class="rank-badge badge-master">MASTER</span>
+      </div>
+
+      <div class="game-item">
+        <div class="game-dot" style="background:#facc15;"></div>
+        <div class="game-info">
+          <div class="game-name">スプラトゥーン3</div>
+          <div class="game-rank">アジア1000位</div>
+        </div>
+        <span class="rank-badge badge-top">TOP</span>
+      </div>
+
+      <div class="game-item">
+        <div class="game-dot" style="background:#4ea8de;"></div>
+        <div class="game-info">
+          <div class="game-name">ゼンレスゾーンゼロ</div>
+          <div class="game-rank">公認活動者</div>
+        </div>
+        <span class="rank-badge badge-auth">公認</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ====== Team ====== -->
+  <div class="card card-team">
+    <div class="team-inner">
+      <div class="team-emblem">🍋</div>
+      <div class="team-name">Citrus esports</div>
+      <div class="team-division">ストリーマー部門</div>
+      <p class="team-note">e-sportsチーム所属</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const YT_CHANNEL_ID = 'UCBRK0ZEOf7ZCmAknLsiHpsQ';
+  const YT_API_KEY    = 'AIzaSyArFyVdQAuCo3xdque1oY9hlIGeb-TYIN4';
+
+  function formatNumber(n) {
+    if (n >= 10000) return (n / 10000).toFixed(1).replace(/\.0$/, '') + '万';
+    return n.toLocaleString('ja-JP');
+  }
+
+  // YouTube登録者数（自動取得）
+  fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${YT_CHANNEL_ID}&key=${YT_API_KEY}`)
+    .then(r => r.json())
+    .then(data => {
+      const subs = parseInt(data.items[0].statistics.subscriberCount, 10);
+      document.getElementById('yt-subs').textContent = formatNumber(subs);
+    })
+    .catch(() => {});
+
+  // 最新動画（配信アーカイブを除外）
+  const LIVE_PATTERN = /配信|ライブ|LIVE/i;
+  fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent('https://www.youtube.com/feeds/videos.xml?channel_id=' + YT_CHANNEL_ID) + '&count=10')
+    .then(r => r.json())
+    .then(data => {
+      const video = data.items.find(item => !LIVE_PATTERN.test(item.title)) || data.items[0];
+      const id = new URL(video.link).searchParams.get('v');
+      document.getElementById('youtube-frame').src = 'https://www.youtube.com/embed/' + id;
+    })
+    .catch(() => {});
+</script>
 </body>
 </html>

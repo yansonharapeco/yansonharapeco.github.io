@@ -33,7 +33,8 @@
       grid-template-areas:
         "profile stats"
         "video   video"
-        "games   team";
+        "games   team"
+        "favs    favs";
       gap: 16px;
       max-width: 900px;
       width: 100%;
@@ -47,7 +48,8 @@
           "stats"
           "video"
           "games"
-          "team";
+          "team"
+          "favs";
       }
     }
 
@@ -67,6 +69,7 @@
     .card-video   { grid-area: video;   animation: fadeUp 0.6s ease 0.25s forwards; }
     .card-games   { grid-area: games;   animation: fadeUp 0.6s ease 0.35s forwards; }
     .card-team    { grid-area: team;    animation: fadeUp 0.6s ease 0.45s forwards; }
+    .card-favs    { grid-area: favs;    animation: fadeUp 0.6s ease 0.55s forwards; }
 
     /* ---- Section Label ---- */
     .card-label {
@@ -202,15 +205,59 @@
        VIDEO CARD
        ============================ */
     .video-wrap {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
       border-radius: 12px;
       overflow: hidden;
     }
 
     .video-wrap iframe {
-      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: 280px;
+      height: 100%;
       border: none;
+    }
+
+    /* ============================
+       FAVORITES CARD
+       ============================ */
+    .fav-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 480px) {
+      .fav-grid { grid-template-columns: 1fr; }
+    }
+
+    .fav-section-label {
+      font-size: 0.78rem;
+      color: #8888aa;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .fav-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .fav-tag {
+      background: #12121a;
+      border: 1px solid #2a2a3a;
+      border-radius: 20px;
+      padding: 5px 13px;
+      font-size: 0.85rem;
+      color: #e8e8f0;
+      font-weight: 500;
     }
 
     /* ============================
@@ -456,6 +503,33 @@
         <span class="rank-badge badge-auth">公認</span>
       </div>
 
+    </div>
+  </div>
+
+  <!-- ====== Favorites ====== -->
+  <div class="card card-favs">
+    <p class="card-label">好きな○○</p>
+    <div class="fav-grid">
+      <div>
+        <div class="fav-section-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#8888aa"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+          好きなアーティスト
+        </div>
+        <div class="fav-tags">
+          <span class="fav-tag">Eve</span>
+          <span class="fav-tag">IVE</span>
+        </div>
+      </div>
+      <div>
+        <div class="fav-section-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#8888aa"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>
+          好きなアニメ
+        </div>
+        <div class="fav-tags">
+          <span class="fav-tag">リコリコ</span>
+          <span class="fav-tag">賭ケグルイ</span>
+        </div>
+      </div>
     </div>
   </div>
 
